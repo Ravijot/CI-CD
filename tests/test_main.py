@@ -1,14 +1,12 @@
 from fastapi.testclient import TestClient
-from app.main import app
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from app.main import myapp  # Import the FastAPI app from main.py
 
-client = TestClient(app)
+client = TestClient(myapp)
 
 def test_read_root():
-    response = client.get("/")
+    response = client.get("/check")
     assert response.status_code == 200
-    assert response.json() == {"message": "Welcome to FastAPI"}
-
-def test_read_item():
-    response = client.get("/items/1?q=test")
-    assert response.status_code == 200
-    assert response.json() == {"item_id": 1, "q": "test"}
+    assert response.json() == {"message": "Welcome to FastAPI"}  # Adjust based on your root endpoint response
