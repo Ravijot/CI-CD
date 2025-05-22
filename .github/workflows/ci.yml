@@ -1,17 +1,19 @@
 name: Python CI for main and develop branches
 
 on:
+  release:
+    types: [published]
   push:
     branches:
       - main
       - develop  # This ensures the workflow triggers for both `main` and `develop`
-      - 'release/*'
+     
       
   pull_request:
     branches:
       - main
       - develop  # This ensures PRs to both branches are checked
-      - 'release/*'
+     
   workflow_dispatch:  # Allows you to run this workflow manually from the Actions tab
 
 jobs:
